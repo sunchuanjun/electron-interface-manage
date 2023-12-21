@@ -2,27 +2,30 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 
-const app = express();
-let server;
+let server,
+	resourcesPath = "../Resources",
+	configPath = resourcesPath + "/config.json";
 
-app.use(express.json());
-app.all("*", function (req, res, next) {
-	fs.readFileSync(path.join(__dirname, "./header.config"), {
-		encoding: "utf8",
-	})
-		.split("\n")
-		.filter(Boolean)
-		.map((item) => item.replace(/\s/g, ""))
-		.map((item) => item.split("="))
-		.forEach(([key, value]) => {
-			res.header(key, value);
-		});
-	if (req.method == "OPTIONS") {
-		res.sendStatus(200);
-	} else {
-		next();
-	}
-});
+function init(app) {
+	app.use(express.json());
+	app.all("*", function (req, res, next) {
+		fs.readFileSync(path.join(__dirname, "./header.config"), {
+			encoding: "utf8",
+		})
+			.split("\n")
+			.filter(Boolean)
+			.map((item) => item.replace(/\s/g, ""))
+			.map((item) => item.split("="))
+			.forEach(([key, value]) => {
+				res.header(key, value);
+			});
+		if (req.method == "OPTIONS") {
+			res.sendStatus(200);
+		} else {
+			next();
+		}
+	});
+}
 
 function getAllChild(list) {
 	if (!Array.isArray(list)) return [];
@@ -46,12 +49,18 @@ function close() {
 module.exports = {
 	exit: close,
 	start: async () => {
+		delete require.cache[require.resolve(configPath)];
 		close();
 		await delay(2000);
+
+		const app = express();
+
+		init(app);
+
 		const [
 			{ port, staticPath, startFileName },
 			points,
-		] = require("../Resources/config.json");
+		] = require(configPath);
 
 		app.use(express.static(staticPath));
 
@@ -66,7 +75,7 @@ module.exports = {
 
 		getAllChild(points).forEach((point) => {
 			try {
-				require(path.join("../Resources", point.file))(app, point.path);
+				require(path.join(resourcesPath, point.file))(app, point.path);
 				console.log(
 					`${point.name} ----> http://localhost:${port}${point.path}`
 				);
