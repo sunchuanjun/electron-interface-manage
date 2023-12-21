@@ -1,6 +1,7 @@
 <script>
 	import Config from "./tabs/Config.svelte";
 	import Router from "./tabs/Router.svelte";
+	import Package from "./tabs/Package.svelte";
 	import { onMount } from "svelte";
 
 	let config,
@@ -89,6 +90,7 @@
 	<sl-tab-group class="sl-tab-group">
 		<sl-tab slot="nav" panel="0" active>基础设置</sl-tab>
 		<sl-tab slot="nav" panel="1">路由</sl-tab>
+		<sl-tab slot="nav" panel="2">工具包</sl-tab>
 		<sl-tab slot="nav" class="tab-other" disabled>
 			{#each btns as btn}
 				<sl-button
@@ -110,6 +112,9 @@
 				<div style="overflow: auto;max-height:calc(100vh - 100px); ">
 					<Router config={config[1]} bind:collect={collect[1]} />
 				</div>
+			</sl-tab-panel>
+			<sl-tab-panel name="2">
+				<Package></Package>
 			</sl-tab-panel>
 		{/if}
 	</sl-tab-group>

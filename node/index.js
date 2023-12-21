@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 let server,
-	resourcesPath = "../Resources",
+	resourcesPath = path.join(__dirname, "../Resources"),
 	configPath = resourcesPath + "/config.json";
 
 function init(app) {
@@ -44,12 +44,20 @@ function close() {
 	});
 	server.closeAllConnections();
 	server.closeIdleConnections();
+	clearCache();
+}
+
+function clearCache() {
+	Object.keys(require.cache)
+		.filter((key) => key.includes(resourcesPath))
+		.forEach((key) => {
+			delete require.cache[require.resolve(key)];
+		});
 }
 
 module.exports = {
 	exit: close,
 	start: async () => {
-		delete require.cache[require.resolve(configPath)];
 		close();
 		await delay(2000);
 
