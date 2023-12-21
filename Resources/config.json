@@ -1,0 +1,14 @@
+[
+	{
+		"port": 9000,
+		"staticPath": "C:\\Users\\IBM\\Desktop\\asdfasdfadsf",
+		"startFileName": "index.html"
+	},
+	[
+		{
+			"file": "login.js",
+			"path": "/login",
+			"name": "登录"
+		}
+	]
+]
