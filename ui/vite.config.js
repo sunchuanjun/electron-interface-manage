@@ -23,7 +23,7 @@ export default defineConfig({
 		}),
 	],
 	build: {
-		outDir: "Dist",
+		outDir: "../electron/ui",
 		rollupOptions: {
 			input: {
 				index: resolve(__dirname, "index.html"),

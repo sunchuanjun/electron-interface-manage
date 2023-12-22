@@ -19,7 +19,7 @@
 		} else {
 			parent.children = parent.children.filter((item) => item !== node);
 			if (node.file) {
-				window.runMainFn?.("rm.file", node.file);
+				ipc("file.rm", node.file);
 			}
 		}
 		parent._sync();

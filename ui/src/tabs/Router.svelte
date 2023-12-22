@@ -18,8 +18,8 @@
 	async function openFile(e) {
 		const { file, name } = e.detail;
 		if (!file) return;
-		const hasFile = await window.runMainFn?.("has.file", file);
-		const fileData = await window.runMainFn?.("get.file", file);
+		const hasFile = await ipc("file.has", file);
+		const fileData = await ipc("file.data", file);
 
 		drawerData = {
 			hasFile,
@@ -35,7 +35,7 @@
 		data = data.concat({});
 	}
 	function saveFile() {
-		window.runMainFn?.("save.file", drawerData.file, textarea.value);
+		ipc("file.save", drawerData.file, textarea.value);
 		drawer.hide();
 	}
 </script>

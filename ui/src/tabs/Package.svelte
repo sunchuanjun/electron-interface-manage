@@ -1,5 +1,5 @@
 <script>
-	import { dependencies } from "../../package.json";
+	import { dependencies } from "../../../electron/package.json";
 </script>
 
 <div>

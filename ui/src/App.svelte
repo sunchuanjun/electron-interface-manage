@@ -16,8 +16,8 @@
 				variant: "primary",
 				fn: function () {
 					changeBtns(0, this.time);
-					window.runMainFn?.(
-						"save.file",
+					ipc(
+						"file.save",
 						"config.json",
 						JSON.stringify(
 							collect.map((item) => item()),
@@ -35,7 +35,7 @@
 				variant: "success",
 				fn: function () {
 					changeBtns(1, this.time);
-					window.runMainFn?.("server.start");
+					ipc("server.start");
 				},
 			},
 			{
@@ -46,13 +46,13 @@
 				variant: "danger",
 				fn: function () {
 					changeBtns(2, this.time);
-					window.runMainFn?.("server.exit");
+					ipc("server.exit");
 				},
 			},
 		];
 
 	onMount(async () => {
-		const data = await window.runMainFn?.("get.file", "config.json");
+		const data = await ipc("file.data", "config.json");
 		if (data) {
 			config = JSON.parse(data);
 		}

@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "postcss": "8.4.14",
+    "postcss-import": "14.1.0",
+    "svelte": "3.50.0",
+    "svelte-preprocess": "4.10.7",
+    "vite": "3.1.0",
+    "autoprefixer": "10.4.7",
+    "vite-plugin-static-copy": "^0.17.0",
+    "@sveltejs/vite-plugin-svelte": "1.0.5"
+  },
+  "dependencies": {
+    "@shoelace-style/shoelace": "^2.8.0",
+    "axios": "^1.5.1"
+  }
+}
