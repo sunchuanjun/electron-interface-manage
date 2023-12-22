@@ -21,9 +21,10 @@
     "@electron-forge/maker-rpm": "6.1.1",
     "@electron-forge/maker-squirrel": "6.1.1",
     "@electron-forge/maker-zip": "6.1.1",
-    "electron": "25.4.0",
+    "electron": "25.4.0"
+  },
+  "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
-    
     "axios": "^1.5.1",
     "busboy": "^1.6.0",
     "dayjs": "^1.11.10",
@@ -40,8 +41,5 @@
     "uuid": "^9.0.1",
     "validator": "^13.11.0",
     "ini": "^4.1.1"
-  },
-  "dependencies": {
-
   }
 }

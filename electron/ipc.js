@@ -24,6 +24,7 @@ const file = {
 		});
 	},
 	save: function (name, data) {
+		console.log(name, data);
 		if (builtInFiles.includes(name)) return;
 		fs.writeFileSync(join(dist, name), data);
 	},
@@ -34,9 +35,9 @@ const server = {
 };
 
 Object.keys(file).forEach((key) => {
-	ipcMain.handle("file." + key, (e, args) => file[key](args));
+	ipcMain.handle("file." + key, (e, ...args) => file[key](...args));
 });
 
 Object.keys(server).forEach((key) => {
-	ipcMain.handle("server." + key, (e, args) => server[key](args));
+	ipcMain.handle("server." + key, (e, ...args) => server[key](...args));
 });

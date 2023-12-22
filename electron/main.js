@@ -21,7 +21,7 @@ const createWindow = () => {
 
 	mainWindow.loadFile("ui/index.html");
 
-	require("./node");
+	require("./ipc");
 
 	// Open the DevTools.
 	// mainWindow.webContents.openDevTools();
