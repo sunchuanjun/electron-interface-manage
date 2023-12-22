@@ -11,7 +11,7 @@
 		"dev:vite": "vite",
 		"build": "run-s build:*",
 		"build:vite": "vite build",
-		"start": " chcp 65001 && electron-forge start",
+		"start": " electron-forge start",
 		"package": "electron-forge package",
 		"make": "electron-forge make"
 	},
