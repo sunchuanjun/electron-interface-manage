@@ -1,5 +1,5 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
-contextBridge.exposeInMainWorld("runMainFn", (name, ...args) =>
+contextBridge.exposeInMainWorld("ipc", (name, ...args) =>
 	ipcRenderer.invoke(name, ...args)
 );
